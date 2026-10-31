@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build plugin ZIP
+        run: |
+          set -euo pipefail
+          mkdir -p build/wp-spamshield
+          # The repository root is the plugin root. Copy runtime files only.
+          rsync -a \
+            --exclude='/.git/' --exclude='/.github/' --exclude='/build/' \
+            --exclude='/.gitignore' --exclude='/.gitattributes' \
+            --exclude='/.editorconfig' --exclude='/.vscode/' --exclude='/.idea/' \
+            --exclude='/tests/' --exclude='/node_modules/' --exclude='/vendor/' \
+            --exclude='/composer.json' --exclude='/composer.lock' \
+            --exclude='/package.json' --exclude='/package-lock.json' \
+            --exclude='/phpunit.xml*' --exclude='/.travis.yml' \
+            --exclude='.DS_Store' --exclude='Thumbs.db' \
+            ./ build/wp-spamshield/
+          cd build
+          zip -r -X wp-spamshield.zip wp-spamshield
+          mv wp-spamshield.zip ..
+
+      - name: Validate ZIP
+        run: |
+          set -euo pipefail
+          unzip -l wp-spamshield.zip | awk 'NR>3 {print $4}' | grep -v '^$' > zip-list.txt || true
+          grep -qx 'wp-spamshield/wp-spamshield.php' zip-list.txt \
+            || { echo "::error::Main plugin file missing from ZIP"; exit 1; }
+          if grep -v '^wp-spamshield/' zip-list.txt | grep -v '^[0-9]*$' | grep -q .; then
+            echo "::error::Entries found outside wp-spamshield/"; exit 1
+          fi
+          if grep -qE '^wp-spamshield/(\.git|\.github)(/|$)' zip-list.txt; then
+            echo "::error::Dev files present"; exit 1
+          fi
+          grep -q '^Version:' wp-spamshield.php || { echo "::error::No Version header"; exit 1; }
+          echo "Plugin header version: $(grep -m1 '^Version:' wp-spamshield.php | awk '{print $2}')"
+          rm zip-list.txt
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" wp-spamshield.zip \
+            --title "$GITHUB_REF_NAME" --generate-notes --verify-tag
