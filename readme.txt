@@ -309,6 +309,13 @@ If you have any further questions, please submit them on the main [WP-SpamShield
 
 == Changelog ==
 
+= Unreleased =
+* Removed the anti-malware MU-plugin scanner and stopped modifying third-party plugin settings, WordPress comment settings, and the site-root `.htaccess`.
+* IP bans continue to be checked by WP-SpamShield, but are no longer written into `.htaccess`.
+* Removed the remote WPScan vulnerability check, WP-SpamShield's automatic-update override, software-version/plugin-count parameters from external links, and IP lookup links that exposed comment IPs to third parties when clicked. Normal WordPress update checks remain controlled by WordPress.
+* Uninstall now removes only explicitly listed WP-SpamShield options, user metadata, and widget assignments.
+* Existing installations may still have the legacy `wp-content/mu-plugins/am-integrity-scanner.php`, which can interfere with or delete other plugins, or a `# BEGIN WP-SpamShield` block in `.htaccess`. Review and remove these manually; this version warns about the scanner but does not modify MU-plugins or site-root files.
+
 = 1.9.21 =
 *released 10/27/17*
 

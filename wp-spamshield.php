@@ -100,8 +100,6 @@ if( !defined( 'WPSS_PLUGIN_JS_PATH' ) ) 		{ define( 'WPSS_PLUGIN_JS_PATH', WPSS_
 if( !defined( 'WPSS_PLUGIN_LANG_PATH' ) ) 		{ define( 'WPSS_PLUGIN_LANG_PATH', WPSS_PLUGIN_PATH . '/languages' ); }
 if( !defined( 'WPSS_PLUGIN_ADMIN_URL' ) ) 		{ define( 'WPSS_PLUGIN_ADMIN_URL', WPSS_ADMIN_URL . '/options-general.php?page=' . WPSS_PLUGIN_NAME ); }
 if( !defined( 'WPSS_I18N_LANG_PATH' ) ) 		{ define( 'WPSS_I18N_LANG_PATH', basename( dirname( __FILE__ ) ) . '/languages' ); }
-if( !defined( 'WPSS_AMIS_SCAN_LB' ) ) 			{ define( 'WPSS_AMIS_SCAN_LB', WPSS_PLUGIN_PATH . '/lib/sec/am-integrity-scanner.php' ); }
-if( !defined( 'WPSS_AMIS_SCAN_MU' ) ) 			{ define( 'WPSS_AMIS_SCAN_MU', WPMU_PLUGIN_DIR . '/am-integrity-scanner.php' ); }
 if( !defined( 'WPSS_SERVER_NAME' ) ) 			{ define( 'WPSS_SERVER_NAME', rs_wpss_get_server_name() ); }
 if( !defined( 'WPSS_SERVER_ADDR' ) ) 			{ define( 'WPSS_SERVER_ADDR', rs_wpss_get_server_addr() ); }
 if( !defined( 'WPSS_SERVER_NAME_REV' ) ) 		{ define( 'WPSS_SERVER_NAME_REV', strrev( WPSS_SERVER_NAME ) ); }
@@ -142,7 +140,7 @@ if( !defined( 'WPSS_CONSULT_URL' ) ) 			{ define( 'WPSS_CONSULT_URL', WPSS_RSM_U
 $popular_cache_plugins_default 					= array( 'batcache', 'cache-enabler', 'cachify', 'comet-cache', 'db-cache-reloaded', 'db-cache-reloaded-fix', 'gator-cache', 'hyper-cache', 'hyper-cache-extended', 'lite-cache', 'litespeed-cache', 'mo-cache', 'quick-cache', 'simple-cache', 'w3-total-cache', 'wp-cachecom', 'wp-fast-cache', 'wp-fastest-cache', 'wp-fastest-cache-premium', 'wp-hummingbird', 'wp-rocket', 'wp-speed-of-light', 'wp-super-cache', 'zencache', 'zencache-pro', );
 if( !defined( 'WPSS_POPULAR_CACHE_PLUGINS' ) )	{ define( 'WPSS_POPULAR_CACHE_PLUGINS', serialize( $popular_cache_plugins_default ) ); }
 /* SET THE DEFAULT CONSTANT VALUES HERE */
-$wpss_options_default							= array( 'comment_logging' => 0, 'comment_logging_all' => 0, 'comment_logging_start_date' => 0, 'comment_logging_end_date' => 0, 'enhanced_comment_blacklist' => 0, 'enable_whitelist' => 0, 'comment_min_length' => 15, 'block_all_trackbacks' => 0, 'block_all_pingbacks' => 0, 'allow_proxy_users' => 1, 'hide_extra_data' => 0, 'registration_shield_disable' => 0, 'registration_shield_level_1' => 0, 'disable_cf7_shield' => 0, 'disable_gf_shield' => 0, 'disable_misc_form_shield' => 0, 'disable_email_encode' => 0, 'allow_comment_author_keywords' => 0, 'auto_update_plugin' => 1, 'auto_purge_cache' => 1, 'disable_security_alerts' => 0, 'promote_plugin_link' => 0, 'form_include_website' => 1, 'form_require_website' => 0, 'form_include_phone' => 1, 'form_require_phone' => 0, 'form_include_company' => 0, 'form_require_company' => 0, 'form_include_drop_down_menu' => 0, 'form_require_drop_down_menu' => 0, 'form_drop_down_menu_title' => '', 'form_drop_down_menu_item_1' => '', 'form_drop_down_menu_item_2' => '', 'form_drop_down_menu_item_3' => '', 'form_drop_down_menu_item_4' => '', 'form_drop_down_menu_item_5' => '', 'form_drop_down_menu_item_6' => '', 'form_drop_down_menu_item_7' => '', 'form_drop_down_menu_item_8' => '', 'form_drop_down_menu_item_9' => '', 'form_drop_down_menu_item_10' => '', 'form_message_width' => 40, 'form_message_height' => 10, 'form_message_min_length' => 25, 'form_response_thank_you_message' => 'Your message was sent successfully. Thank you.', 'form_include_user_meta' => 1, 'form_mail_encode' => 1, );
+$wpss_options_default							= array( 'comment_logging' => 0, 'comment_logging_all' => 0, 'comment_logging_start_date' => 0, 'comment_logging_end_date' => 0, 'enhanced_comment_blacklist' => 0, 'enable_whitelist' => 0, 'comment_min_length' => 15, 'block_all_trackbacks' => 0, 'block_all_pingbacks' => 0, 'allow_proxy_users' => 1, 'hide_extra_data' => 0, 'registration_shield_disable' => 0, 'registration_shield_level_1' => 0, 'disable_cf7_shield' => 0, 'disable_gf_shield' => 0, 'disable_misc_form_shield' => 0, 'disable_email_encode' => 0, 'allow_comment_author_keywords' => 0, 'auto_purge_cache' => 1, 'promote_plugin_link' => 0, 'form_include_website' => 1, 'form_require_website' => 0, 'form_include_phone' => 1, 'form_require_phone' => 0, 'form_include_company' => 0, 'form_require_company' => 0, 'form_include_drop_down_menu' => 0, 'form_require_drop_down_menu' => 0, 'form_drop_down_menu_title' => '', 'form_drop_down_menu_item_1' => '', 'form_drop_down_menu_item_2' => '', 'form_drop_down_menu_item_3' => '', 'form_drop_down_menu_item_4' => '', 'form_drop_down_menu_item_5' => '', 'form_drop_down_menu_item_6' => '', 'form_drop_down_menu_item_7' => '', 'form_drop_down_menu_item_8' => '', 'form_drop_down_menu_item_9' => '', 'form_drop_down_menu_item_10' => '', 'form_message_width' => 40, 'form_message_height' => 10, 'form_message_min_length' => 25, 'form_response_thank_you_message' => 'Your message was sent successfully. Thank you.', 'form_include_user_meta' => 1, 'form_mail_encode' => 1, );
 if( !defined( 'WPSS_OPTIONS_DEFAULT' ) ) 		{ define( 'WPSS_OPTIONS_DEFAULT', serialize( $wpss_options_default ) ); }
 $wpss_depr_options_default 						= array( 'wpss_version' => '', 'init_user_approve_run' => '', 'install_status' => '', 'warning_status' => '', 'regalert_status' => '', 'last_admin' => '', 'wpss_admins' => array(), 'reg_count' => 0, 'spam_count' => 0, 'wpssmid_cache' => array(), 'wpss_procdat' => array( 'total_tracked' => 0, 'total_wpss_time' => 0, 'avg_wpss_proc_time' => 0, 'total_comment_proc_time' => 0, 'avg_comment_proc_time' => 0, 'total_wpss_avg_tracked' => 0, 'total_avg_wpss_proc_time' => 0, 'avg2_wpss_proc_time' => 0 ), );
 if( !defined( 'WPSS_DEPR_OPTIONS_DEFAULT' ) ) 	{ define( 'WPSS_DEPR_OPTIONS_DEFAULT', serialize( $wpss_depr_options_default ) ); }
@@ -173,7 +171,6 @@ if( !defined( 'WPSS_COMPAT_MODE' ) ) 			{ define( 'WPSS_COMPAT_MODE',		FALSE ); 
 if( !defined( 'WPSS_TEMP_BL_DISABLE' ) ) 		{ define( 'WPSS_TEMP_BL_DISABLE',	FALSE ); }	/* Disable Temporary Blacklist.		Reference: https://www.redsandmarketing.com/plugins/wp-spamshield/advanced-configuration/?acnf=disable_temp_blacklist#acnf_disable_temp_blacklist	*/
 if( !defined( 'WPSS_IP_BAN_ENABLE' ) ) 			{ define( 'WPSS_IP_BAN_ENABLE',		FALSE ); }	/* Enable Automatic IP Ban. BETA	Reference: None yet. Coming soon.	*/
 if( !defined( 'WPSS_IP_BAN_CLEAR' ) ) 			{ define( 'WPSS_IP_BAN_CLEAR',		FALSE ); }	/* Clear IP Ban List. BETA			Reference: None yet. Coming soon.	*/
-if( !defined( 'WPSS_AUTOUP_DISABLE' ) ) 		{ define( 'WPSS_AUTOUP_DISABLE',	FALSE ); }	/* Force-disable Automatic Update.	Reference: None yet. Coming soon.	*/
 if( !defined( 'WPSS_CUSTOM_ECOM' ) ) 			{ define( 'WPSS_CUSTOM_ECOM',		FALSE ); }	/* Set Custom Ecom. BETA			Reference: None yet. Coming soon.	*/
 if( !defined( 'WPSS_CUSTOM_CART_URL' ) )		{ define( 'WPSS_CUSTOM_CART_URL',	FALSE ); }	/* Set Custom Cart URL. BETA		Reference: None yet. Coming soon.	*/
 else {
@@ -495,8 +492,6 @@ function rs_wpss_purge_nonces() {
 	/**
 	 *	Purge expired nonces. Keep the nonce cache clean.
 	 */
-	/* Deploy Anti-Malware Integrity Scanner */
-	@copy( WPSS_AMIS_SCAN_LB, WPSS_AMIS_SCAN_MU ); @WPSS_PHP::chmod( WPSS_AMIS_SCAN_MU, 600 );
 	$timenow = time();
 	$spamshield_nonces = get_option( 'spamshield_nonces' );
 	if( empty( $spamshield_nonces ) ) { return FALSE; }
@@ -771,13 +766,7 @@ function rs_wpss_get_schemeless_url( $url ) {
 }
 
 function rs_wpss_append_url( $url = NULL ) {
-	/** 
-	 *	Add essential data to link URLs to aid tech support
-	 *	@since 1.9.7
-	 */
-	if( empty( $url ) ) { return ''; }
-	global $wpss_active_plugins; $wpss_active_plugins = rs_wpss_get_active_plugins(); $num_plugins = count( $wpss_active_plugins );
-	return add_query_arg( array( 'wpssv' => WPSS_VERSION, 'wpv' => WPSS_WP_VERSION, 'phv' => PHP_VERSION, 'npl' => $num_plugins, ), $url );
+	return empty( $url ) ? '' : $url;
 }
 
 function rs_wpss_get_rewrite_base() {
@@ -2306,8 +2295,6 @@ function rs_wpss_load_widgets() {
  *	$mk_log		- Make log log file if none exists
  */
 function rs_wpss_log_reset( $admin_ips = NULL, $get_fws = FALSE, $clr_hta = FALSE, $mk_log = FALSE ) {
-	/* Deploy Anti-Malware Integrity Scanner */
-	@copy( WPSS_AMIS_SCAN_LB, WPSS_AMIS_SCAN_MU ); @WPSS_PHP::chmod( WPSS_AMIS_SCAN_MU, 600 );
 	$admin_ips	= !empty( $admin_ips ) && is_array( $admin_ips ) ? $admin_ips : get_option( 'spamshield_admins' );
 	$admin_ips	= rs_wpss_remove_expired_admins( $admin_ips );
 	if( !empty( $admin_ips ) && is_array( $admin_ips ) ) {
@@ -2884,7 +2871,7 @@ function rs_wpss_log_data( $wpss_log_data_array, $wpss_log_data_errors, $wpss_lo
 				'User-Agent'				=> $wpss_http_user_agent,
 				'Browser'					=> ( !empty( $wpss_http_browser ) ) ? $wpss_http_browser : 'Not Detected',
 				'Location'					=> '%%{NO_OUTPUT_EMPTY}%%'. ( ( !empty( $wpss_geolocation ) ) ? $wpss_geolocation : '' ),
-				'IP Address'				=> $ip."'] ['http://ipaddressdata.com/".$ip,
+				'IP Address'				=> $ip,
 				'Port'						=> $port,
 				'Reverse DNS'				=> $reverse_dns,
 				'Forward DNS'				=> $forward_dns,
@@ -3879,7 +3866,6 @@ function rs_wpss_contact_form( $content = NULL, $atts = array(), $shortcode_chec
 				}
 				$cf_msg_2 .= __( 'IP Address', 'wp-spamshield' ) . ': '.$ip."\r\n";
 				$cf_msg_2 .= __( 'Server', 'wp-spamshield' ) . ': '.$reverse_dns."\r\n";
-				$cf_msg_2 .= __( 'IP Address Lookup', 'wp-spamshield' ) . ': http://ipaddressdata.com/'.$ip."\r\n";
 				if( !current_user_can( 'manage_options' ) ) {
 					$blacklist_text = __( 'Blacklist the IP Address:', 'wp-spamshield' );
 					$cf_msg_2 .= "\r\n".$blacklist_text.' '. WP_SpamShield::blacklist_url( $ip ) ."\r\n";
@@ -6449,18 +6435,28 @@ function rs_wpss_extra_notification_data( $text, $spamshield_options = NULL, $cf
 		}
 		$text .= __( 'IP Address', 'wp-spamshield' ) . ': '.$ip.$eml_eol;
 		$text .= __( 'Server', 'wp-spamshield' ) . ': '.$reverse_dns.$eml_eol;
-		$text .= __( 'IP Address Lookup', 'wp-spamshield' ) . ': http://ipaddressdata.com/'.$ip."\r\n\r\n";
 		$text .= '(' . __( 'This data is helpful if you need to submit a spam sample.', 'wp-spamshield' ) . ')'.$eml_eol;
 	}
 	return $text;
 }
 
 function rs_wpss_comment_blacklist_option() {
-	return version_compare( WPSS_WP_VERSION, '5.5', '>=' ) ? 'disallowed_keys' : 'blacklist_keys';
+	return 'spamshield_comment_blacklist';
+}
+
+function rs_wpss_get_comment_blacklist_keys() {
+	$option = rs_wpss_comment_blacklist_option();
+	$keys = get_option( $option, NULL );
+	if( NULL === $keys ) {
+		$legacy_option = version_compare( WPSS_WP_VERSION, '5.5', '>=' ) ? 'disallowed_keys' : 'blacklist_keys';
+		$keys = get_option( $legacy_option, '' );
+		add_option( $option, $keys );
+	}
+	return $keys;
 }
 
 function rs_wpss_add_ip_to_blacklist( $ip_to_blacklist ) {
-	$blacklist_keys 		= trim( stripslashes( get_option( rs_wpss_comment_blacklist_option() ) ) );
+	$blacklist_keys 		= trim( stripslashes( rs_wpss_get_comment_blacklist_keys() ) );
 	$blacklist_keys_update	= $blacklist_keys.WPSS_EOL.$ip_to_blacklist;
 	rs_wpss_update_bw_list_keys( 'black', $blacklist_keys_update );
 }
@@ -6490,7 +6486,7 @@ function rs_wpss_add_ip_to_blacklist( $ip_to_blacklist ) {
  *	@return			bool	TRUE if submission contains blacklisted content, FALSE if submission does not
  */
 function rs_wpss_blacklist_check( $author = NULL, $email = NULL, $url = NULL, $content = NULL, $user_ip = NULL, $user_agent = NULL, $user_server = NULL ) {
-	$blacklist_keys = trim( stripslashes( get_option( rs_wpss_comment_blacklist_option() ) ) );
+	$blacklist_keys = trim( stripslashes( rs_wpss_get_comment_blacklist_keys() ) );
 	if( empty( $blacklist_keys ) ) { return FALSE; } /* If blacklist keys are empty */
 
 	if( empty( $user_ip ) || empty( $user_server ) ) {
@@ -6595,7 +6591,7 @@ function rs_wpss_get_bw_list_keys( $list ) {
 	 *	$list - 'white' or 'black'
 	 */
 	$opname = array( 'white' => 'spamshield_whitelist_keys', 'black' => rs_wpss_comment_blacklist_option() );
-	$keys	= trim( stripslashes( get_option( $opname[$list] ) ) );
+	$keys	= trim( stripslashes( ( 'black' === $list ) ? rs_wpss_get_comment_blacklist_keys() : get_option( $opname[$list] ) ) );
 	$keys	= str_replace( array( "\r\n", "\r", "\f", "\v", "\n\n\n", "\n\n" ), "\n", $keys );
 	$arr	= explode( "\n", $keys );
 	$tmp	= WP_SpamShield::sort_unique( $arr );
@@ -7219,15 +7215,11 @@ function rs_wpss_admin_jp_fix( $get_jp_com_status = FALSE ) {
 		if( empty( $wpss_jp_active_mods ) ) { $wpss_jp_active_mods = get_option( 'jetpack_active_modules' ); }
 		if( !empty( $wpss_jp_active_mods ) && is_array( $wpss_jp_active_mods ) ) { $jp_com_key = array_search( 'comments', $wpss_jp_active_mods, TRUE ); } else { $wpss_jp_fix = TRUE; return FALSE; }
 		if( isset( $jp_com_key ) && is_int( $jp_com_key ) ) {
-			if( TRUE === $get_jp_com_status ) { return TRUE; }
-			$jp_num_active_mods = count( $wpss_jp_active_mods );
-			if( empty( $wpss_jp_active_mods ) ) { $jp_num_active_mods = 0; }
-			if( $jp_num_active_mods < 2 ) { $wpss_jp_active_mods = array(); } else { unset( $wpss_jp_active_mods[$jp_com_key] ); }
-			update_option( 'jetpack_active_modules', $wpss_jp_active_mods );
-			@WP_SpamShield::append_log_data( NULL, NULL, 'JetPack Comments module deactivated.' );
+			return TRUE;
 		}
 	}
 	$wpss_jp_fix = TRUE;
+	return FALSE;
 }
 
 function rs_wpss_admin_ao_fix() {
@@ -7251,13 +7243,15 @@ function rs_wpss_admin_ao_fix() {
 		if( FALSE !== strpos( $ao_js_exc, $exc_phr ) && $wpss_ao_js_exc === $ao_js_exc_mod ) { $wpss_ao_fix = TRUE; return; } else { $ao_js_exc = $ao_js_exc_mod; }
 		if( FALSE === strpos( $ao_js_exc, $exc_phr ) ) { $s = empty( $ao_js_exc ) ? '' : ','; $ao_js_exc .= $s.$exc_phr; }
 		$ao_js_exc = implode( ',', array_unique( explode( ',', $ao_js_exc ) ) );
-		if( $ao_js_exc !== $wpss_ao_js_exc ) {
-			update_option( 'autoptimize_js_exclude', $ao_js_exc );
-			@WP_SpamShield::append_log_data( NULL, NULL, 'Autoptimize JavaScript exclusion setting appended.' );
-		}
 	}
 	$wpss_ao_fix = TRUE;
 }
+
+function rs_wpss_legacy_scanner_notice() {
+	if( !current_user_can( 'manage_options' ) || !defined( 'WPMU_PLUGIN_DIR' ) || !file_exists( WPMU_PLUGIN_DIR.WPSS_DS.'am-integrity-scanner.php' ) ) { return; }
+	echo '<div class="notice notice-warning"><p>'.esc_html__( 'A legacy WP-SpamShield MU-plugin scanner was found. It may interfere with or delete other plugins. This version does not modify MU-plugins; review and remove the legacy file manually.', 'wp-spamshield' ).'</p></div>';
+}
+add_action( 'admin_notices', 'rs_wpss_legacy_scanner_notice' );
 
 /* Admin Functions - END */
 
@@ -7343,7 +7337,6 @@ class WP_SpamShield {
 		add_filter( 'is_email', 'rs_wpss_adv_validate_email', 999, 3 );
 		add_filter( 'wp_mail', array( 'WPSS_Security', 'mail_init' ), 999, 1 );
 		add_filter( 'lostpassword_post', array( 'WPSS_Security', 'password_reset' ), 999, 1 );
-		add_filter( 'auto_update_plugin', array( 'WPSS_Security', 'auto_update' ), 100, 2 );
 		if( 'plugins.php' === $pagenow && is_multisite() ) { add_filter( 'all_plugins', array( $this, 'network_admin_remove_plugin' ) ); }
 		if( 'plugins.php' === $pagenow ) {
 			add_filter( 'plugin_action_links_'.WPSS_PLUGIN_BASENAME, array( $this, 'action_links' ), 10, 4 );
@@ -8308,19 +8301,6 @@ class WP_SpamShield {
 			 */
 			$admin_ips = get_option( 'spamshield_admins' );
 			if( !empty( $admin_ips ) ) { rs_wpss_log_reset( $admin_ips ); } else { rs_wpss_log_reset( NULL, FALSE, FALSE, TRUE ); /* Create log file if it doesn't exist */ }
-			/* Require Author Names and Emails on Comments - Added 1.1.7 */
-			update_option( 'require_name_email', '1' );
-			/**
-			 *	Set 'default_role' to 'subscriber' for security - Added 1.3.7 - Disabled 1.9.0.6
-			 *	update_option( 'default_role', 'subscriber' );
-			 *	Turn on Comment Moderation
-			 *	update_option( 'comment_moderation', 1 );
-			 *	update_option( 'moderation_notify', 1 );
-			 *	Compatibility Checks
-			 */
-			if( TRUE === WPSS_COMPAT_MODE || defined( 'WPSS_SOFT_COMPAT_MODE' ) ) { rs_wpss_admin_jp_fix(); }
-			rs_wpss_admin_ao_fix();
-
 			/* Ensure Correct Permissions of JS file */
 			$inst_file_test_3 = WPSS_PLUGIN_JS_PATH.WPSS_DS.'jscripts.php';
 			@clearstatcache();
@@ -8529,12 +8509,6 @@ class WP_SpamShield {
 			}
 			$links[] = '<a href="'.WPSS_DONATE_URL.'" target="_blank" rel="external" >' . __( 'Donate', 'wp-spamshield' ) . '</a>';
 		}
-		$disable_security_alerts = self::get_option( 'disable_security_alerts' );
-		$slug = trim( dirname( $file ), '/' );
-		if( !empty( $slug ) && is_super_admin() && empty( $disable_security_alerts ) && ( empty( $_GET['plugin_status'] ) || 'all' === $_GET['plugin_status'] || 'active' === $_GET['plugin_status'] || 'inactive' === $_GET['plugin_status'] || 'upgrade' === $_GET['plugin_status'] ) ) { /* Superadmin only / Don't add on MU or drop-in page */
-			$title = __( 'Security check provided by WP-SpamShield. Data provided by WPScan Vulnerability Database.', 'wp-spamshield' ); /* TO DO: TRANSLATE */
-			$links[] = '<a href="https://wpvulndb.com/plugins/'.$slug.'" target="_blank" rel="external" title="'.$title.'" >' . __( 'Security Check', 'wp-spamshield' ) . '</a>'; /* TO DO: Translate */
-		}
 		return $links;
 	}
 
@@ -8555,13 +8529,6 @@ class WP_SpamShield {
 		$ip = $comment->comment_author_IP;
 		$blacklist_url = esc_url( WP_SpamShield::blacklist_url( $ip ) );
 		$actions['blacklist']	= ( rs_wpss_blacklist_check( NULL, NULL, NULL, NULL, $ip, NULL, $ip ) ) ? __( 'IP Blacklisted', 'wp-spamshield' ) : '<a href="' . $blacklist_url . '" title="' . __( 'Blacklist the IP Address:', 'wp-spamshield' ) . ' ' . $ip . '">' . __( 'Blacklist', 'wp-spamshield' ) . '</a>';
-		if( TRUE === WP_DEBUG ) {
-			$hide_extra_data = WP_Spamshield::get_option( 'hide_extra_data' );
-			if( empty( $hide_extra_data ) ) {
-				$actions['abuseipdb']	= '<a href="https://www.abuseipdb.com/check/' . $ip . '" target="_blank" rel="external noopener noreferrer" >' . __( 'AbuseIPDB', 'wp-spamshield' ) . '</a>';
-				$actions['iplookup']	= '<a href="http://ipaddressdata.com/' . $ip . '" target="_blank" rel="external noopener noreferrer" >' . __( 'IP Address Lookup', 'wp-spamshield' ) . '</a>';
-			}
-		}
 		return $actions;
 	}
 
@@ -8790,8 +8757,6 @@ class WP_SpamShield {
 			self::deprecated_options_check();
 			/* Check if plugin has been upgraded */
 			$this->upgrade_check();
-			/* Check for outdated WordPress versions with known security flaws */
-			$this->insecure_wordpress_check();
 			/* Check for pending admin notices */
 			$admin_notices = get_option( 'spamshield_admin_notices' );
 			if( !empty( $admin_notices ) ) { add_action( 'admin_notices', array( $this, 'admin_notices' ) ); }
@@ -8831,7 +8796,7 @@ class WP_SpamShield {
 			}
 			/* Check for incompatible plugins */
 			if( WPSS_Compatibility::is_plugin_active( 'plugin-organizer' ) ) {
-				$notice_text = '<p>' . sprintf( __( '<strong>Plugin Organizer is not compatible with WP-SpamShield, and should be deactivated to prevent issues.</strong> <a href=%1$s>More Information</a>', 'wp-spamshield' ), '"'. rs_wpss_append_url( WPSS_RSM_URL.'known-conflicts/?knic=plugin_po#knic_plugin_po' ) .'" target="_blank" rel="external" ' ) . '</p><p>' . sprintf( __( 'You can deactivate and manage plugins <a href=%1$s>here</a>.', 'wp-spamshield' ), '"'. WPSS_ADMIN_URL.'/plugins.php' .'" ' ) . '</p>'; /* TO DO: TRANSLATE - Added 1.9.20 */
+				$notice_text = '<p>' . sprintf( __( '<strong>Plugin Organizer may conflict with WP-SpamShield.</strong> WP-SpamShield will not modify or deactivate it. <a href=%1$s>More Information</a>', 'wp-spamshield' ), '"'. rs_wpss_append_url( WPSS_RSM_URL.'known-conflicts/?knic=plugin_po#knic_plugin_po' ) .'" target="_blank" rel="external" ' ) . '</p>';
 				self::new_admin_notice( $notice_text, array( $this, 'admin_notices' ) ); return FALSE;
 			}
 			/**
@@ -8851,26 +8816,6 @@ class WP_SpamShield {
 			/* Check for Required PHP Functions - warn if missing */
 			$this->check_cpn_notices();
 			/* Security Check - See if (extremely) old version of plugin still active */
-			$old_version = 'wp-spamfree/wp-spamfree.php';
-			$old_version_active = WPSS_Compatibility::is_plugin_active( $old_version, FALSE );
-			if( !empty( $old_version_active ) ) {
-				/**
-				 *	Not safe to keep old version active due to unpatched security hole(s), broken PHP, and lack of maintenance.
-				 *	For security reasons, deactivate old version.
-				 */
-				deactivate_plugins( $old_version );
-				/* Clean up database */
-				$del_options = array( 'wp_spamfree_version', 'spamfree_count', 'spamfree_options' );
-				foreach( $del_options as $i => $option ) { delete_option( $option ); }
-				/**
-				 *	Good to go!
-				 *	Since WP-SpamShield takes over 100% of old version's responsibilities, there is no loss of functionality, only improvements.
-				 *	Site speed will improve and server load will now drop dramatically.
-				 */
-			}
-			/* Compatibility Checks */
-			if( TRUE === WPSS_COMPAT_MODE || defined( 'WPSS_SOFT_COMPAT_MODE' ) ) { rs_wpss_admin_jp_fix(); }
-			rs_wpss_admin_ao_fix();
 		}
 		if( rs_wpss_is_session_active() ) {
 			$_SESSION['wpss_requirements_checked_'.WPSS_HASH] = time();
@@ -8879,8 +8824,6 @@ class WP_SpamShield {
 	}
 
 	function upgrade_check( $installed_ver = NULL, $activation = FALSE ) {
-		/* Deploy Anti-Malware Integrity Scanner */
-		@copy( WPSS_AMIS_SCAN_LB, WPSS_AMIS_SCAN_MU ); @WPSS_PHP::chmod( WPSS_AMIS_SCAN_MU, 600 );
 		if( empty( $installed_ver ) ) { $installed_ver = self::get_option( 'wpss_version' ); }
 		if( $installed_ver !== WPSS_VERSION ) { /* Plugin has been upgraded */
 			$upd_options = array( 'spamshield_wpssmid_cache' => array() );
@@ -8907,8 +8850,7 @@ class WP_SpamShield {
 		 *	Check Installation Status and Do Compatibility Pre-Checks
 		 *	@since 1.9.1
 		 */
-		/* Deploy Anti-Malware Integrity Scanner */
-		@copy( WPSS_AMIS_SCAN_LB, WPSS_AMIS_SCAN_MU ); @WPSS_PHP::chmod( WPSS_AMIS_SCAN_MU, 600 );
+
 		/* Check for incompatible web hosting environments */
 		if( WPSS_Filters::host_ns_blacklist_chk() ) { update_option( 'spamshield_install_status', 'incorrect' ); return FALSE; }
 		/* Integrity Checks */
@@ -8952,65 +8894,6 @@ class WP_SpamShield {
 		if( 'wp-spamshield' !== WPSS_PLUGIN_NAME ) { return FALSE; }
 		if( !self::preg_match( "~^([0-9]{1}\.){1,4}[0-9]{1,2}([a-z][0-9]{1,2})?$~", WPSS_VERSION ) ) { return FALSE; }
 		return TRUE; /* PASSED */
-	}
-
-	function insecure_wordpress_check() {
-		/**
-		 *	SECURITY - Check for WordPress versions with known security vulnerabilies.
-		 *	TO DO: Move to WPSS_Security class
-		 *	@since 1.9.7.8
-		 */
-		$disable_security_alerts = self::get_option( 'disable_security_alerts' );
-		if( !is_super_admin() || !empty( $disable_security_alerts ) ) { return FALSE; }
-		$current	= get_site_transient( 'wpss_iswpv_check' );
-		/* Invalidate the transient when WPSS_WP_VERSION changes */
-		if ( is_object( $current ) && isset( $current->version_checked ) && WPSS_WP_VERSION != $current->version_checked ) { $current = FALSE; }
-		if ( !is_object( $current ) ) {
-			$current					= new stdClass;
-			$current->updates			= array();
-			$current->version_checked	= WPSS_WP_VERSION;
-		}
-		if ( isset( $current->last_checked, $current->version_checked ) && 1 * WEEK_IN_SECONDS > ( time() - $current->last_checked ) && $current->version_checked == WPSS_WP_VERSION ) { return; }
-		$current->last_checked	= time();
-		set_site_transient( 'wpss_iswpv_check', $current );
-		if( self::preg_match( "~^([0-9]\.)+[0-9]+\-RC[0-9]+\-~i", WPSS_WP_VERSION ) ) { return NULL; }
-		$wpv		= str_replace( '.', '', WPSS_WP_VERSION );
-		$url		= 'https://wpvulndb.com/api/v2/wordpresses/'.$wpv;
-		$inf		= 'https://wpvulndb.com/wordpresses/'.$wpv;
-		$wps		= 'https://wpvulndb.com/';
-		$http_args	= array(
-			'timeout'				=> 10,
-			'decompress'			=> FALSE,
-			'httpversion'			=> '1.1',
-			'sslverify'				=> TRUE,
-			'limit_response_size'	=> 50 * KB_IN_BYTES,					/* Security: Always limit size of returned data. */
-			'reject_unsafe_urls'	=> TRUE,
-			'user-agent'			=> WPSS_Security::privacy_ua( TRUE ),	/* Security/Privacy: Remove WP version and site URL from UA. (WP default UA includes these.) */
-			'headers'				=> array(),
-		);
-		$resp		= wp_remote_get( $url, $http_args );
-		$data		= ( !is_wp_error( $resp ) ) ? json_decode( wp_remote_retrieve_body( $resp ), TRUE ) : '';
-		$vulns		= ( !empty( $data[WPSS_WP_VERSION]['vulnerabilities'] ) ) ? $data[WPSS_WP_VERSION]['vulnerabilities'] : '';
-		$vnum		= ( is_array( $vulns ) ) ? count( $vulns ) : 0;
-		if( empty( $vnum ) ) { return FALSE; }
-
-		$vc_url		= 'https://api.wordpress.org/core/version-check/1.7/';
-		$vc_resp	= wp_remote_get( $vc_url, $http_args );
-		$vc_data	= ( !is_wp_error( $vc_resp ) ) ? json_decode( wp_remote_retrieve_body( $vc_resp ), TRUE ) : '';
-		$latest		= ( !empty( $vc_data['offers'][0]['version'] ) ) ? (string) $vc_data['offers'][0]['version'] : '';
-		if( $latest === WPSS_WP_VERSION ) {
-			return FALSE;
-		} else {
-			$notice_text = sprintf( __( 'Insecure WordPress version detected. Your site is running WordPress version %1$s, which has %2$s known security vulnerabilities. You should upgrade WordPress as soon as possible. <a href=%3$s>More Information</a>', 'wp-spamshield' ), WPSS_WP_VERSION, $vnum, '"'.$inf.'" target="_blank" rel="external" ' ); /* TO DO: TRANSLATE */
-		}
-		$notice_text  = '<p><strong>' . __( 'SECURITY ALERT', 'wp-spamshield' ) . ':</strong> '.$notice_text.'</p>'; /* TO DO: TRANSLATE */
-		$notice_text .= '<p>' . sprintf( __( 'Security alert provided by <a href=%1$s>WP-SpamShield</a>. Data provided by <a href=%2$s>WPScan Vulnerability Database</a>.', 'wp-spamshield' ), '"'.WPSS_HOME_URL.'" target="_blank" rel="external" ', '"'.$wps.'" target="_blank" rel="external" ' ) . '</p>'; /* TO DO: TRANSLATE */
-		if( is_multisite() ) {
-			self::new_network_admin_notice( $notice_text, array( $this, 'admin_notices' ) );
-		} else {
-			self::new_admin_notice( $notice_text, array( $this, 'admin_notices' ) );
-		}
-		return TRUE;
 	}
 
 	function disable_plugin_edit() {
@@ -9366,8 +9249,7 @@ class WP_SpamShield {
 	 *	@modified		1.9.7.5, 1.9.12
 	 */
 	protected function purge_cache() {
-		/* Deploy Anti-Malware Integrity Scanner */
-		@copy( WPSS_AMIS_SCAN_LB, WPSS_AMIS_SCAN_MU ); @WPSS_PHP::chmod( WPSS_AMIS_SCAN_MU, 600 );
+
 		global $wpss_purge_cache_complete,$wpss_cache_check,$wp_fastest_cache;
 		$auto_cache_purge = self::get_option( 'auto_purge_cache' );
 		if( empty( $auto_cache_purge ) || !empty( $wpss_purge_cache_complete ) ) { return FALSE; }
