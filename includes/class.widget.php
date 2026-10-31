@@ -157,8 +157,8 @@ class WP_SpamShield_Counter_CG extends WP_Widget {
 	}
 
 	private function RGB_TO_HEX($R, $G, $B) {
-		$rgb = compact('R','G','B');
-		$output = array_map('dechex', $rgb);
+		$rgb = array_map( 'intval', compact( 'R', 'G', 'B' ) );
+		$output = array_map( 'dechex', $rgb );
 		$output = array_map( array( $this, 'fixhex2' ), $output); /* Fix single-digit hex */
 		$HEX = '#'.implode($output);
 		return $HEX;

@@ -3,7 +3,7 @@ Contributors: RedSand, blackhawkcybersec, rsm-support
 Donate link: https://www.redsandmarketing.com/go/donate/wp-spamshield/
 Tags: anti-spam, antispam, comments, security, spam
 Requires at least: 4.0
-Tested up to: 4.8
+Tested up to: 7.1.4
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2
@@ -113,7 +113,7 @@ If you would like to help translate, please [get in touch with us](https://www.r
 = Minimum Requirements =
 
 * **WordPress 4.0+** (Recommended: WordPress 4.5 or higher)
-* **PHP 5.3+** (Recommended: PHP 5.6 or higher) [PHP 7 Compatible: YES - 100%]
+* **PHP 5.3+** (Recommended: PHP 5.6 or higher) [PHP 7 Compatible: YES - 100%; PHP 8 tested: 8.3 and 8.5]
 * **Your server must be configured to allow the use of an `.htaccess` file.** (This is enabled by default on the vast majority of servers.)
 
 Please see the plugin documentation's [minimum requirements section](https://www.redsandmarketing.com/plugins/wp-spamshield/?wpss=requirements#wpss_requirements) for more information.
@@ -308,6 +308,13 @@ If you have any further questions, please submit them on the main [WP-SpamShield
 10. Widget - WP-SpamShield Counter - Graphic: Style 9
 
 == Changelog ==
+
+= Unreleased =
+* Removed the anti-malware MU-plugin scanner and stopped modifying third-party plugin settings, WordPress comment settings, and the site-root `.htaccess`.
+* IP bans continue to be checked by WP-SpamShield, but are no longer written into `.htaccess`.
+* Removed the remote WPScan vulnerability check, WP-SpamShield's automatic-update override, software-version/plugin-count parameters from external links, and IP lookup links that exposed comment IPs to third parties when clicked. Normal WordPress update checks remain controlled by WordPress.
+* Uninstall now removes only explicitly listed WP-SpamShield options, user metadata, and widget assignments.
+* Existing installations may still have the legacy `wp-content/mu-plugins/am-integrity-scanner.php`, which can interfere with or delete other plugins, or a `# BEGIN WP-SpamShield` block in `.htaccess`. Review and remove these manually; this version warns about the scanner but does not modify MU-plugins or site-root files.
 
 = 1.9.21 =
 *released 10/27/17*
@@ -1126,4 +1133,3 @@ For a complete list of changes to the plugin, view the [Changelog](https://www.r
 = 1.9.21 =
 
 * Made various code enhancements and improvements. Please see Changelog for details.
-

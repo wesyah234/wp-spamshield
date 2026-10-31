@@ -380,7 +380,6 @@ class WPSS_Security extends WP_SpamShield {
 				if( rs_wpss_is_admin_ip( $b ) || rs_wpss_whitelist_check( NULL, $b ) ) { unset( $wpss_ip_ban[$i] ); }
 			}
 			update_option( 'spamshield_ip_ban', $wpss_ip_ban );
-			self::ip_ban_htaccess();
 			$ip_ban_status = TRUE;
 		}
 		if( rs_wpss_is_session_active() ) {
@@ -393,63 +392,6 @@ class WPSS_Security extends WP_SpamShield {
 	}
 
 	/**
-	 *	Write the updated list of banned IP's to .htaccess.
-	 *	@dependencies	...
-	 *	@used by		...
-	 *	@since			1.9.4
-	 */
-	static private function ip_ban_htaccess() {
-		$hta_bak_dir		= WPSS_CONTENT_DIR_PATH.WPSS_DS.'backup';
-		$hta_wpss_bak_dir	= $hta_bak_dir.WPSS_DS.'wp-spamshield';
-		$hta_file			= ABSPATH.WPSS_DS.'.htaccess';
-		$hta_bak_file		= $hta_wpss_bak_dir.WPSS_DS.'original.htaccess';
-		$wpss_index_file	= WPSS_PLUGIN_PATH.WPSS_DS.'index.php';
-		$bak_dir_hta_file	= WPSS_PLUGIN_PATH.WPSS_DS.'lib'.WPSS_DS.'sec'.WPSS_DS.'.htaccess';
-		$ip 				= parent::get_ip_addr();
-		$user_agent 		= rs_wpss_get_user_agent();
-		$wpss_ip_ban		= get_option( 'spamshield_ip_ban' ); if( empty( $wpss_ip_ban ) ) { return FALSE; }
-		$wpss_ip_ban		= rs_wpss_sort_unique( $wpss_ip_ban );
-		$banned_ip_count	= count( $wpss_ip_ban );
-		$ip_ban_rgx			= '^(' . str_replace( array( '.', ':', ), array( '\.', '\:', ), implode( '|', $wpss_ip_ban ) ) . ')$';
-
-		$wpss_hta_data = WPSS_EOL.WPSS_EOL.'# BEGIN WP-SpamShield'.WPSS_EOL.WPSS_EOL;
-		$wpss_hta_data .= '<IfModule mod_setenvif.c>'.WPSS_EOL."\t".'SetEnvIf Remote_Addr '.$ip_ban_rgx.' WPSS_SEC_THREAT'.WPSS_EOL.'</IfModule>';
-		$wpss_hta_data .= WPSS_EOL.WPSS_EOL.'# END WP-SpamShield'.WPSS_EOL.WPSS_EOL;
-		$wpss_hta_data_wp = '# BEGIN WordPress';
-
-		@clearstatcache();
-		if( @file_exists( $hta_file ) ) {
-			if( ! @file_exists( $hta_wpss_bak_dir ) ) {
-				@wp_mkdir_p( $hta_wpss_bak_dir );
-				WPSS_PHP::chmod( $hta_wpss_bak_dir,	750 );
-				WPSS_PHP::chmod( $hta_bak_dir,		750 );
-				@copy ( $bak_dir_hta_file,	$hta_wpss_bak_dir.WPSS_DS.'.htaccess'	);
-				@copy ( $wpss_index_file,	$hta_wpss_bak_dir.WPSS_DS.'index.php'	);
-				@copy ( $bak_dir_hta_file,	$hta_bak_dir.WPSS_DS.'.htaccess'		);
-				@copy ( $wpss_index_file,	$hta_bak_dir.WPSS_DS.'index.php'		);
-			}
-			if( ! @file_exists( $hta_bak_file ) ) {
-				@copy ( $hta_file, $hta_bak_file );
-			}
-			$hta_contents = @file_get_contents( $hta_file );
-			if( strpos( $hta_contents, '# BEGIN WP-SpamShield' ) !== FALSE && strpos( $hta_contents, '# END WP-SpamShield' ) !== FALSE ) {
-				$hta_contents_mod = @preg_replace( "~#\ BEGIN\ WP-SpamShield[\w\W]+#\ END\ WP-SpamShield~i", trim( $wpss_hta_data, WPSS_EOL ), $hta_contents );
-				if( $hta_contents_mod !== $hta_contents ) {
-					@file_put_contents( $hta_file, $hta_contents_mod, LOCK_EX );
-				}
-			} elseif( strpos( $hta_contents, '# BEGIN WordPress' ) !== FALSE ) {
-				$hta_contents_mod = @preg_replace( "~#\ BEGIN\ WordPress~i", $wpss_hta_data.$wpss_hta_data_wp, $hta_contents );
-				@file_put_contents( $hta_file, $hta_contents_mod, LOCK_EX );
-			} else {
-				@file_put_contents( $hta_file, WPSS_EOL.WPSS_EOL.$wpss_hta_data.WPSS_EOL.WPSS_EOL, FILE_APPEND | LOCK_EX );
-			}
-			@parent::append_log_data( NULL, NULL, WPSS_EOL.'IP address banned and added to .htaccess block list. IP: '.$ip );
-			@parent::append_log_data( NULL, NULL, WPSS_EOL.'User-Agent: '.$user_agent );
-			@parent::append_log_data( NULL, NULL, WPSS_EOL.'$_SERVER Data: '.print_r($_SERVER,1) );
-		}
-	}
-
-	/**
 	 *	Clear IP ban from database and .htaccess.
 	 *	@dependencies	...
 	 *	@used by		...
@@ -458,45 +400,6 @@ class WPSS_Security extends WP_SpamShield {
 	static public function clear_ip_ban() {
 		update_option( 'spamshield_ip_ban', array() );
 		unset( $_SESSION['WPSS_IP_BAN_'.WPSS_HASH], $_SERVER['WPSS_IP_BAN'], $_SESSION['WPSS_SEC_THREAT_'.WPSS_HASH], $_SERVER['WPSS_SEC_THREAT'] );
-		self::clear_ip_ban_htaccess();
-	}
-
-	/**
-	 *	Clear banned IP info from .htaccess.
-	 *	@dependencies	...
-	 *	@used by		...
-	 *	@since			1.9.4
-	 */
-	static private function clear_ip_ban_htaccess() {
-		$hta_bak_dir		= WPSS_CONTENT_DIR_PATH.WPSS_DS.'backup';
-		$hta_wpss_bak_dir	= $hta_bak_dir.WPSS_DS.'wp-spamshield';
-		$hta_file			= ABSPATH.WPSS_DS.'.htaccess';
-		$hta_bak_file		= $hta_wpss_bak_dir.WPSS_DS.'original.htaccess';
-		$wpss_index_file	= WPSS_PLUGIN_PATH.WPSS_DS.'index.php';
-		$bak_dir_hta_file	= WPSS_PLUGIN_PATH.WPSS_DS.'lib'.WPSS_DS.'sec'.WPSS_DS.'.htaccess';
-
-		$wpss_hta_data = '# BEGIN WP-SpamShield'.WPSS_EOL.WPSS_EOL.'# END WP-SpamShield';
-
-		if( @file_exists( $hta_file ) ) {
-			if( ! @file_exists( $hta_wpss_bak_dir ) ) {
-				@wp_mkdir_p( $hta_wpss_bak_dir );
-				@copy ( $bak_dir_hta_file, $hta_wpss_bak_dir.WPSS_DS.'.htaccess' );
-				@copy ( $wpss_index_file, $hta_wpss_bak_dir.WPSS_DS.'index.php' );
-				@copy ( $bak_dir_hta_file, $hta_bak_dir.WPSS_DS.'.htaccess' );
-				@copy ( $wpss_index_file, $hta_bak_dir.WPSS_DS.'index.php' );
-			}
-			if( ! @file_exists( $hta_bak_file ) ) {
-				@copy ( $hta_file, $hta_bak_file );
-			}
-			$hta_contents = @file_get_contents( $hta_file );
-			if( strpos( $hta_contents, '# BEGIN WP-SpamShield' ) !== FALSE && strpos( $hta_contents, '# END WP-SpamShield' ) !== FALSE ) {
-				$hta_contents_mod = @preg_replace( "~#\ BEGIN\ WP-SpamShield[\w\W]+#\ END\ WP-SpamShield~i", $wpss_hta_data, $hta_contents );
-				if( $hta_contents_mod !== $hta_contents ) {
-					@file_put_contents( $hta_file, $hta_contents_mod, LOCK_EX );
-					@parent::append_log_data( NULL, NULL, WPSS_EOL.'Banned IP addresses removed from .htaccess.' );
-				}
-			}
-		}
 	}
 
 	/**
@@ -836,18 +739,6 @@ class WPSS_Security extends WP_SpamShield {
 		if( 'widgets.php' === $pagenow || 'customize.php' === $pagenow ) { return NULL; }
 		if( rs_wpss_is_admin_sproc() || rs_wpss_is_doing_cron() || rs_wpss_is_installing() || rs_wpss_is_cli() || parent::is_customize_preview() ) { return; }
 		if( empty( $_POST ) && !empty( $HTTP_RAW_POST_DATA ) ) { $_POST = array( 'HTTP_RAW_POST_DATA' => $HTTP_RAW_POST_DATA ); }
-		if( !empty( $_POST ) && is_array( $_POST ) ) {
-			$pref = 'PO_';
-			foreach( $_POST as $k => $v ) {
-				if( 0 === strpos( $k, $pref ) || !empty( $_POST[$pref.'nonce'] ) || ( !empty( $_GET['action'] ) && 0 === strpos( $_GET['action'], $pref ) ) ) {
-					if( is_array( $v ) ) {
-						foreach( $v as $ak => $av ) {
-							if( 0 === strpos( $av, WPSS_PLUGIN_NAME ) ) { unset( $v[$ak] ); }
-						}; $_POST[$k] = ( WPSS_Utils::is_array_num( $v ) ) ? WPSS_Utils::sort_unique( $v ) : $v;
-					}
-				}
-			}
-		}
 		return FALSE;
 	}
 
@@ -900,19 +791,6 @@ class WPSS_Security extends WP_SpamShield {
 	 *	@since			1.9.7.8
 	 *	@modified		1.9.9.8.6	Added option to disable, Added advanced option
 	 */
-	static public function auto_update( $update, $item ) {
-		if( TRUE === WPSS_AUTOUP_DISABLE || rs_wpss_is_admin_sproc() ) { return $update; }
-		$auto_update_plugin = parent::get_option( 'auto_update_plugin' );
-		if( empty( $auto_update_plugin ) ) { return $update; }
-		/* Array of plugin slugs to always auto-update */
-		$plugins = array( 'wp-spamshield', );
-		if( WPSS_PHP::in_array( $item->slug, $plugins ) ) {
-			return TRUE;	/* Always update plugins in this array */
-		} else {
-			return $update;	/* Else, use the normal API response to decide whether to update or not */
-		}
-	}
-
 	/**
 	 *	Disable REST in WordPres 4.7.0+
 	 *	@dependencies	rs_wpss_error_txt()
@@ -1003,4 +881,3 @@ class WPSS_Security extends WP_SpamShield {
 	}
 
 }
-
