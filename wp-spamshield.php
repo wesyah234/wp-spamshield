@@ -2379,8 +2379,7 @@ function rs_wpss_log_reset( $admin_ips = NULL, $get_fws = FALSE, $clr_hta = FALS
 	$htaccess_data .= "\t".'ForceType "text/plain; charset=UTF-8"'.WPSS_EOL;
 	$htaccess_data .= '</Files>'.WPSS_EOL;
 	$htaccess_fp = @fopen( $log_files[3],'a+' );
-	@fwrite( $htaccess_fp, $htaccess_data );
-	@fclose( $htaccess_fp );
+	if( is_resource( $htaccess_fp ) ) { @fwrite( $htaccess_fp, $htaccess_data ); @fclose( $htaccess_fp ); }
 	/* 6 - If $get_fws (File Writeable Status), repeat #3 again and return status */
 	if( !empty( $get_fws ) ) {
 		@clearstatcache();
