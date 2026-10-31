@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name:	WP-SpamShield
-Plugin URI:		https://www.redsandmarketing.com/plugins/wp-spamshield/
+Plugin URI:		https://github.com/wesyah234/wp-spamshield
 Description:	An extremely powerful and user-friendly all-in-one anti-spam plugin that <strong>eliminates comment spam, trackback spam, contact form spam, and registration spam</strong>. No CAPTCHA's, challenge questions, or other inconvenience to website visitors. Enjoy running a WordPress site without spam! Includes a spam-blocking contact form feature.
 Version:		1.9.21
-Author:			Red Sand Media Group
-Author URI:		https://www.redsandmarketing.com/
+Author:			wesyah234
+Author URI:		https://github.com/wesyah234
 License:		GPL2+
 License URI:	https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:	wp-spamshield
@@ -13,9 +13,8 @@ Domain Path:	/languages
 */
 
 /*
-	Copyright © 2007-2017 Scott Allen				https://www.redsandmarketing.com/contact/
-	Copyright © 2014-2017 Red Sand Media Group		https://www.redsandmarketing.com/
-	Copyright © 2016-2017 Blackhawk Cybersecurity	https://blackhawkcybersec.com/
+	Copyright © 2007-2017 Scott Allen, Red Sand Media Group, Blackhawk Cybersecurity (original authors)
+	Fork maintained by wesyah234	https://github.com/wesyah234
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -128,13 +127,11 @@ if( !defined( 'WPSS_CKON' ) ) 					{ define( 'WPSS_CKON', 'CKON'.WPSS_DATE_C_YYM
 if( !defined( 'WPSS_SJECT' ) ) 					{ define( 'WPSS_SJECT', 'SJECT'.WPSS_DATE_C_YYMM ); }
 if( !defined( 'WPSS_F0' ) ) 					{ define( 'WPSS_F0', (int) -999999999 ); }		/* Hook Priority - First */
 if( !defined( 'WPSS_L0' ) ) 					{ define( 'WPSS_L0', (int) abs( WPSS_F0 ) ); }	/* Hook Priority - Last */
-if( !defined( 'WPSS_RSM_URL' ) ) 				{ define( 'WPSS_RSM_URL', 'https://www.redsandmarketing.com/' ); }
-if( !defined( 'WPSS_HOME_URL' ) ) 				{ define( 'WPSS_HOME_URL', WPSS_RSM_URL.'plugins/'.WPSS_PLUGIN_NAME.'/' ); }
-if( !defined( 'WPSS_SUPPORT_URL' ) ) 			{ define( 'WPSS_SUPPORT_URL', WPSS_RSM_URL.'plugins/'.WPSS_PLUGIN_NAME.'/support/' ); }
+if( !defined( 'WPSS_RSM_URL' ) ) 				{ define( 'WPSS_RSM_URL', 'https://github.com/wesyah234/wp-spamshield/' ); }
+if( !defined( 'WPSS_HOME_URL' ) ) 				{ define( 'WPSS_HOME_URL', WPSS_RSM_URL ); }
+if( !defined( 'WPSS_SUPPORT_URL' ) ) 			{ define( 'WPSS_SUPPORT_URL', WPSS_RSM_URL.'issues' ); }
 if( !defined( 'WPSS_WP_URL' ) ) 				{ define( 'WPSS_WP_URL', 'https://wordpress.org/extend/plugins/'.WPSS_PLUGIN_NAME.'/' ); }
 if( !defined( 'WPSS_WP_RATING_URL' ) ) 			{ define( 'WPSS_WP_RATING_URL', 'https://wordpress.org/support/plugin/'.WPSS_PLUGIN_NAME.'/reviews/#new-post' ); }
-if( !defined( 'WPSS_DONATE_URL' ) ) 			{ define( 'WPSS_DONATE_URL', WPSS_RSM_URL.'go/donate/'.WPSS_PLUGIN_NAME.'/' ); }
-if( !defined( 'WPSS_CONSULT_URL' ) ) 			{ define( 'WPSS_CONSULT_URL', WPSS_RSM_URL.'web-design/wordpress-consulting/' ); }
 
 /* INCLUDE POPULAR CACHE PLUGINS HERE (23) */
 $popular_cache_plugins_default 					= array( 'batcache', 'cache-enabler', 'cachify', 'comet-cache', 'db-cache-reloaded', 'db-cache-reloaded-fix', 'gator-cache', 'hyper-cache', 'hyper-cache-extended', 'lite-cache', 'litespeed-cache', 'mo-cache', 'quick-cache', 'simple-cache', 'w3-total-cache', 'wp-cachecom', 'wp-fast-cache', 'wp-fastest-cache', 'wp-fastest-cache-premium', 'wp-hummingbird', 'wp-rocket', 'wp-speed-of-light', 'wp-super-cache', 'zencache', 'zencache-pro', );
@@ -167,8 +164,8 @@ rs_wpss_do_includes();
 
 /* SET ADVANCED OPTIONS - Can be overridden in wp-config.php. Advanced users only. Consult documentation thoroughly first. */
 $wpss_ecom_urls = array( '/cart/', '/catalog/', '/checkout/', '/products/', '/shop/', '/shoppe/', '/store/', );
-if( !defined( 'WPSS_COMPAT_MODE' ) ) 			{ define( 'WPSS_COMPAT_MODE',		FALSE ); }	/* Force-enable Compatiility Mode.	Reference: https://www.redsandmarketing.com/plugins/wp-spamshield/advanced-configuration/?acnf=compatibility_mode#acnf_compatibility_mode			*/
-if( !defined( 'WPSS_TEMP_BL_DISABLE' ) ) 		{ define( 'WPSS_TEMP_BL_DISABLE',	FALSE ); }	/* Disable Temporary Blacklist.		Reference: https://www.redsandmarketing.com/plugins/wp-spamshield/advanced-configuration/?acnf=disable_temp_blacklist#acnf_disable_temp_blacklist	*/
+if( !defined( 'WPSS_COMPAT_MODE' ) ) 			{ define( 'WPSS_COMPAT_MODE',		FALSE ); }	/* Force-enable Compatiility Mode.				*/
+if( !defined( 'WPSS_TEMP_BL_DISABLE' ) ) 		{ define( 'WPSS_TEMP_BL_DISABLE',	FALSE ); }	/* Disable Temporary Blacklist.			*/
 if( !defined( 'WPSS_IP_BAN_ENABLE' ) ) 			{ define( 'WPSS_IP_BAN_ENABLE',		FALSE ); }	/* Enable Automatic IP Ban. BETA	Reference: None yet. Coming soon.	*/
 if( !defined( 'WPSS_IP_BAN_CLEAR' ) ) 			{ define( 'WPSS_IP_BAN_CLEAR',		FALSE ); }	/* Clear IP Ban List. BETA			Reference: None yet. Coming soon.	*/
 if( !defined( 'WPSS_CUSTOM_ECOM' ) ) 			{ define( 'WPSS_CUSTOM_ECOM',		FALSE ); }	/* Set Custom Ecom. BETA			Reference: None yet. Coming soon.	*/
@@ -1403,12 +1400,6 @@ function rs_wpss_plug_hmpage_txt( $case = 'UCW' ) {
 function rs_wpss_plug_wppage_txt( $case = 'UCW' ) {
 	/* $case = 'def' (default - unaltered), 'UCW' (uppercase words) */
 	$txt = trim( str_replace( '&#187;', '', __( 'WordPress.org Plugin Page &#187;' ) ) );
-	return $case === 'UCW' ? WP_SpamShield::casetrans( 'ucwords', $txt ) : $txt;
-}
-
-function rs_wpss_donate_txt( $case = 'def' ) {
-	/* $case = 'def' (default - unaltered), 'UCW' (uppercase words) */
-	$txt = rs_wpss_is_lang_en_us() ? 'Donate to WP-SpamShield' : trim( str_replace( '&#187;', '', __( 'Donate to this plugin &#187;' ) ) );
 	return $case === 'UCW' ? WP_SpamShield::casetrans( 'ucwords', $txt ) : $txt;
 }
 
@@ -8507,7 +8498,6 @@ class WP_SpamShield {
 			if( rs_wpss_count() >= 2000 ) {
 				$links[] = '<a href="'.WPSS_WP_RATING_URL.'" title="' . __( 'Let others know by giving it a good rating on WordPress.org!', 'wp-spamshield' ) . '" target="_blank" rel="external" >' . __( 'Rate the Plugin', 'wp-spamshield' ) . '</a>';
 			}
-			$links[] = '<a href="'.WPSS_DONATE_URL.'" target="_blank" rel="external" >' . __( 'Donate', 'wp-spamshield' ) . '</a>';
 		}
 		return $links;
 	}
@@ -8703,10 +8693,6 @@ class WP_SpamShield {
 				}
 				$notice_text = sprintf( __( 'WP-SpamShield has blocked <strong> %s </strong> spam!', 'wp-spamshield' ), $spamcount_con ) .$avg_d_txt.'</p><p>'. __( 'If you like how WP-SpamShield protects your site from spam, would you take a moment to give it a rating on WordPress.org?', 'wp-spamshield' ) .'</p><p>'. sprintf( '<strong><a href=%1$s>%2$s</a></strong>', '"'.WPSS_WP_RATING_URL.'" target="_blank" rel="external" ', __( 'Yes, I\'d like to rate it!', 'wp-spamshield' ) ) .' &mdash; '.  sprintf( '<strong><a href=%1$s>%2$s</a></strong>', '"'.$query_str_con.'" ', __( 'I already did!', 'wp-spamshield' ) );
 				$status['currentnag'] = TRUE; $status['vote'] = FALSE;
-			} elseif( empty( $status['donate'] ) && $est_hrs_ret >= 40 ) { /* TO DO: TRANSLATE */
-				$nid = 'n02'; $style = 'updated';
-				$notice_text = __( 'Happy with WP-SpamShield?', 'wp-spamshield' ) .' '. sprintf( __( 'This plugin has saved you <strong> %s </strong> hours of managing spam. You\'re welcome!', 'wp-spamshield' ), $spamhours_con ) .'</p><p>'. __( 'WP-SpamShield is provided for free.', 'wp-spamshield' ) . ' ' . __( 'If you like the plugin, consider a donation to help further its development.', 'wp-spamshield' ) .'</p><p>'. sprintf( '<strong><a href=%1$s>%2$s</a></strong>', '"'.WPSS_DONATE_URL.'" target="_blank" rel="external" ', __( 'Yes, I\'d like to donate!', 'wp-spamshield' ) ) .' &mdash; '. sprintf( '<strong><a href=%1$s>%2$s</a></strong>', '"'.$query_str_con.'" ', __( 'I already did!', 'wp-spamshield' ) );
-				$status['currentnag'] = TRUE; $status['donate'] = FALSE;
 			}
 		}
 		/* Warnings */
@@ -8763,7 +8749,7 @@ class WP_SpamShield {
 			/* Run Code Integrity Check */
 			if( !$this->integrity_check() ) {
 				deactivate_plugins( WPSS_PLUGIN_BASENAME );
-				$notice_text = '<p>' . __( 'Plugin <strong>deactivated</strong>.' ) . ' ' . sprintf( __( 'Code integrity check failed. Please uninstall and delete your current copy of the plugin, download a fresh copy from an official source, and reinstall. <a href=%1$s>More Information</a>', 'wp-spamshield' ), '"'. rs_wpss_append_url( 'https://www.redsandmarketing.com/plugins/wp-spamshield/?wpss=security_note#wpss_security_note' ) .'" target="_blank" rel="external" ' )  . '</p>'; /* TO DO: TRANSLATE - Added 1.9.9.4 */
+				$notice_text = '<p>' . __( 'Plugin <strong>deactivated</strong>.' ) . ' ' . sprintf( __( 'Code integrity check failed. Please uninstall and delete your current copy of the plugin, download a fresh copy from an official source, and reinstall. <a href=%1$s>More Information</a>', 'wp-spamshield' ), '"'. rs_wpss_append_url( WPSS_HOME_URL ) .'" target="_blank" rel="external" ' )  . '</p>'; /* TO DO: TRANSLATE - Added 1.9.9.4 */
 				self::new_admin_notice( $notice_text, array( $this, 'admin_notices' ) ); return FALSE;
 			}
 			/* Make sure user is not running site in incompatible web hosting environments */
@@ -8808,7 +8794,7 @@ class WP_SpamShield {
 			/* Standalone Nginx */
 			if( !empty( $is_nginx ) && empty( $is_apache ) ) {
 				deactivate_plugins( WPSS_PLUGIN_BASENAME );
-				$notice_text = '<p>' . __( 'Plugin <strong>deactivated</strong>.' ) . ' ' . sprintf( __( 'Your server is running standalone Nginx but WP-SpamShield requires either an Apache or Apache/Nginx hybrid setup. Your site does not meet the plugin\'s <a href=%1$s>minimum requirements</a>.', 'wp-spamshield' ), '"'. rs_wpss_append_url( 'https://www.redsandmarketing.com/plugins/wp-spamshield/?wpss=requirements#wpss_requirements' ) .'" target="_blank" rel="external" ' ) . '</p>'; /* TO DO: TRANSLATE - Added 1.9.9.8.2 */
+				$notice_text = '<p>' . __( 'Plugin <strong>deactivated</strong>.' ) . ' ' . sprintf( __( 'Your server is running standalone Nginx but WP-SpamShield requires either an Apache or Apache/Nginx hybrid setup. Your site does not meet the plugin\'s <a href=%1$s>minimum requirements</a>.', 'wp-spamshield' ), '"'. rs_wpss_append_url( WPSS_HOME_URL ) .'" target="_blank" rel="external" ' ) . '</p>'; /* TO DO: TRANSLATE - Added 1.9.9.8.2 */
 				self::new_admin_notice( $notice_text, array( $this, 'admin_notices' ) ); return FALSE;
 			}
 			/* Check for Incompatible Plugins and Plugins with Duplicated Functionality - warn if active */

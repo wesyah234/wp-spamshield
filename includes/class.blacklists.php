@@ -18,7 +18,6 @@ final class WPSS_BL extends WPSS_Filters {
 	/**
 	 *  WP-SpamShield Blacklist Class
 	 *  Dynamically generated daily based on research conducted by the Anti-Spam Research Group.
-	 *	For more info: https://www.redsandmarketing.com/about/anti-spam-research/
 	 */
 
 	function __construct() {
