@@ -2030,7 +2030,7 @@ function rs_wpss_encode_emails( $string ) {
 				\[[\d.a-fA-F:]+\]
 			)
 		}xi';
-	return preg_replace_callback( $regex_phrase, create_function( '$matches', 'return '.$encode_method.'($matches[0]);' ), $string );
+	return preg_replace_callback( $regex_phrase, function( $matches ) use ( $encode_method ) { return $encode_method( $matches[0] ); }, $string );
 }
 
 /**
