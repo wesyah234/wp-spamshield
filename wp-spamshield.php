@@ -49,7 +49,7 @@ define( 'WPSS_VERSION',					'1.9.21'				);
 define( 'WPSS_WP_VERSION',				$GLOBALS['wp_version']	);
 define( 'WPSS_REQUIRED_WP_VERSION',		'4.0'					);
 define( 'WPSS_REQUIRED_PHP_VERSION',	'5.3'					);
-define( 'WPSS_PHP_TEST_MAX',			'7.1'					); /* MAX PHP VERSION TESTED */
+define( 'WPSS_PHP_TEST_MAX',			'8.5'					); /* MAX PHP VERSION TESTED */
 
 
 /**
@@ -6455,8 +6455,12 @@ function rs_wpss_extra_notification_data( $text, $spamshield_options = NULL, $cf
 	return $text;
 }
 
+function rs_wpss_comment_blacklist_option() {
+	return version_compare( WPSS_WP_VERSION, '5.5', '>=' ) ? 'disallowed_keys' : 'blacklist_keys';
+}
+
 function rs_wpss_add_ip_to_blacklist( $ip_to_blacklist ) {
-	$blacklist_keys 		= trim( stripslashes( get_option( 'blacklist_keys' ) ) );
+	$blacklist_keys 		= trim( stripslashes( get_option( rs_wpss_comment_blacklist_option() ) ) );
 	$blacklist_keys_update	= $blacklist_keys.WPSS_EOL.$ip_to_blacklist;
 	rs_wpss_update_bw_list_keys( 'black', $blacklist_keys_update );
 }
@@ -6486,7 +6490,7 @@ function rs_wpss_add_ip_to_blacklist( $ip_to_blacklist ) {
  *	@return			bool	TRUE if submission contains blacklisted content, FALSE if submission does not
  */
 function rs_wpss_blacklist_check( $author = NULL, $email = NULL, $url = NULL, $content = NULL, $user_ip = NULL, $user_agent = NULL, $user_server = NULL ) {
-	$blacklist_keys = trim( stripslashes( get_option( 'blacklist_keys' ) ) );
+	$blacklist_keys = trim( stripslashes( get_option( rs_wpss_comment_blacklist_option() ) ) );
 	if( empty( $blacklist_keys ) ) { return FALSE; } /* If blacklist keys are empty */
 
 	if( empty( $user_ip ) || empty( $user_server ) ) {
@@ -6590,7 +6594,7 @@ function rs_wpss_get_bw_list_keys( $list ) {
 	 *	Get blacklist or whitelist keys
 	 *	$list - 'white' or 'black'
 	 */
-	$opname = array( 'white' => 'spamshield_whitelist_keys', 'black' => 'blacklist_keys' );
+	$opname = array( 'white' => 'spamshield_whitelist_keys', 'black' => rs_wpss_comment_blacklist_option() );
 	$keys	= trim( stripslashes( get_option( $opname[$list] ) ) );
 	$keys	= str_replace( array( "\r\n", "\r", "\f", "\v", "\n\n\n", "\n\n" ), "\n", $keys );
 	$arr	= explode( "\n", $keys );
@@ -6604,7 +6608,7 @@ function rs_wpss_update_bw_list_keys( $list, $keys ) {
 	 *	Update blacklist or whitelist keys
 	 *	$list - 'white' or 'black'
 	 */
-	$opname = array( 'white' => 'spamshield_whitelist_keys', 'black' => 'blacklist_keys' );
+	$opname = array( 'white' => 'spamshield_whitelist_keys', 'black' => rs_wpss_comment_blacklist_option() );
 	$keys	= str_replace( array( "\r\n", "\r", "\f", "\v", "\n\n\n", "\n\n" ), "\n", $keys );
 	$arr	= explode( "\n", $keys );
 	$tmp	= WP_SpamShield::sort_unique( $arr );
@@ -9199,7 +9203,7 @@ class WP_SpamShield {
 	static public function get_option( $option = 'all' ) {
 		global $spamshield_options;
 		if( empty( $spamshield_options ) ) {
-			$spamshield_options = get_option( 'spamshield_options' );
+			$spamshield_options = (array) get_option( 'spamshield_options' );
 			rs_wpss_update_session_data( $spamshield_options );
 		}
 		if( 'all' === $option ) {
@@ -9224,7 +9228,7 @@ class WP_SpamShield {
 	static public function update_option( $arr, $update = TRUE ) {
 		global $spamshield_options;
 		if( empty( $spamshield_options ) ) {
-			$spamshield_options = get_option( 'spamshield_options' );
+			$spamshield_options = (array) get_option( 'spamshield_options' );
 		}
 		foreach ( $arr as $option => $value ) { $spamshield_options[$option] = $value; }
 		/* TO DO: Add ... */
@@ -9240,7 +9244,7 @@ class WP_SpamShield {
 	static public function delete_option( $arr, $update = TRUE ) {
 		global $spamshield_options;
 		if( empty( $spamshield_options ) ) {
-			$spamshield_options = get_option( 'spamshield_options' );
+			$spamshield_options = (array) get_option( 'spamshield_options' );
 		}
 		foreach ( $arr as $i => $option ) { unset ( $spamshield_options[$option] ); }
 		/* TO DO: Add ... */

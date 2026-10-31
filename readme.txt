@@ -3,7 +3,7 @@ Contributors: RedSand, blackhawkcybersec, rsm-support
 Donate link: https://www.redsandmarketing.com/go/donate/wp-spamshield/
 Tags: anti-spam, antispam, comments, security, spam
 Requires at least: 4.0
-Tested up to: 4.8
+Tested up to: 7.1.4
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2
@@ -113,7 +113,7 @@ If you would like to help translate, please [get in touch with us](https://www.r
 = Minimum Requirements =
 
 * **WordPress 4.0+** (Recommended: WordPress 4.5 or higher)
-* **PHP 5.3+** (Recommended: PHP 5.6 or higher) [PHP 7 Compatible: YES - 100%]
+* **PHP 5.3+** (Recommended: PHP 5.6 or higher) [PHP 7 Compatible: YES - 100%; PHP 8 tested: 8.3 and 8.5]
 * **Your server must be configured to allow the use of an `.htaccess` file.** (This is enabled by default on the vast majority of servers.)
 
 Please see the plugin documentation's [minimum requirements section](https://www.redsandmarketing.com/plugins/wp-spamshield/?wpss=requirements#wpss_requirements) for more information.
@@ -1126,4 +1126,3 @@ For a complete list of changes to the plugin, view the [Changelog](https://www.r
 = 1.9.21 =
 
 * Made various code enhancements and improvements. Please see Changelog for details.
-
