@@ -18,7 +18,7 @@ final class WPSS_Compatibility extends WP_SpamShield {
 	/**
 	 *	WP-SpamShield Compatibility Class
 	 *	Plugin detection
-	 *	Compatibility deconfliction for some of the plugins listed in the Known Issues and Plugin Conflicts ( http://www.redsandmarketing.com/plugins/wp-spamshield/known-conflicts/ )
+	 *	Compatibility deconfliction for some of the plugins listed in the Known Issues and Plugin Conflicts
 	 *	Where possible, apply compatibility fixes or workarounds
 	 */
 

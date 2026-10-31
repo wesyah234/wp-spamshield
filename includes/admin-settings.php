@@ -62,7 +62,7 @@ if( TRUE !== WPSS_DEBUG && TRUE !== WP_DEBUG ) { @ini_set( 'display_errors', 0 )
 				$wpss_inst_status_msg_text	= WPSS_Func::lower( $wpss_inst_status_msg_main );
 				/* Add specifics - Standalone Nginx */
 				if( !empty( $is_nginx ) && empty( $is_apache ) ) {
-					$wpss_inst_status_msg_main	.= ' ' . sprintf( __( 'Your server is running <a href=%1$s>standalone Nginx</a>.', 'wp-spamshield' ), '"'. rs_wpss_append_url( 'https://www.redsandmarketing.com/plugins/wp-spamshield/?wpss=requirements#wpss_requirements' ) .'" target="_blank" rel="external" ' ); /* TO DO: TRANSLATE - Added 1.9.9.8.1 */
+					$wpss_inst_status_msg_main	.= ' ' . sprintf( __( 'Your server is running <a href=%1$s>standalone Nginx</a>.', 'wp-spamshield' ), '"'. rs_wpss_append_url( WPSS_HOME_URL ) .'" target="_blank" rel="external" ' ); /* TO DO: TRANSLATE - Added 1.9.9.8.1 */
 				}
 			}
 
@@ -292,18 +292,7 @@ if( TRUE !== WPSS_DEBUG && TRUE !== WP_DEBUG ) { @ini_set( 'display_errors', 0 )
 
 			<strong><?php echo rs_wpss_doc_txt(); ?>:</strong> <a href="<?php echo rs_wpss_append_url( WPSS_HOME_URL ); ?>" target="_blank" rel="external" ><?php echo rs_wpss_plug_hmpage_txt(); ?></a><br />
 			<strong><?php _e( 'Tech Support', 'wp-spamshield' ); ?>:</strong> <a href="<?php echo rs_wpss_append_url( WPSS_SUPPORT_URL ); ?>" target="_blank" rel="external" ><?php _e( 'WP-SpamShield Support', 'wp-spamshield' ); ?></a><br />
-			<strong><?php _e( 'Follow on Twitter', 'wp-spamshield' ); ?>:</strong> <a href="https://twitter.com/WPSpamShield" target="_blank" rel="external" >@WPSpamShield</a><br />
-			<strong><?php _e( 'Let Others Know', 'wp-spamshield' ); ?>:</strong> <a href="https://www.redsandmarketing.com/blog/wp-spamshield-wordpress-plugin-released/#comments" target="_blank" rel="external" ><?php _e('Leave a Comment'); ?></a><br />
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="margin-top:10px;">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="DFMTNHJEPFFUL">
-            <input type="image" src="data:image/png;base64,R0lGODlhSgAVAPcmAP+sLf7iq/7gpf7ksf7en/+6Tf+vM7+LNv+xOu7bskBedhA+a/+0QN+aLo9/WHBuWxA+aoCQl0BfeXB+f2BhUc+TMn+Jg7+YU76zkZ+HVp6jmX+Nj97Qre+iKo6Xk56gke+yT/63R3+LiTBUdO7Tm1BdXs4HAkBfd+7ZrH+Khs+VON7MomB0fkBgeq6ojf7HbGBze765o87Bnp6hlf/s0M7Do/7Rhb62mjBKWxA7YjBUczBUcv64SmB2gp9+Qs7EqP/89jBTcY6Uif+lNEBedN+dNIBwSa6wov/NgtEQBY6Vjb+OO/7amP++Xf+3RlBpev7UjP/Ti6+QVb++r8+hUs6/mf/05P/CYNEOBc6+lN7Knf7epP+oLH+MjJ6fjVBrfmBmXf/05v/ryf61Rv/ZoCBJbv/it3BoTY6WkP/py//YnyBCX/+vOkBVYP+/Wf63S767qP7WjP65Tf/w2f/FZu/gwv/u0++kMVBsgmB1gP7hqmB4h//uzv7dnv/w2HCAhP7Qf66smf+mLf/boP6/WTBMYf7Jcv+uM//y2yBIba6unv/sz//itv+pNP+yP/7mt/+pJv/15//rzv7pvv/syP/dqv/46v/03//OhP/w0/+/Xv+xOAAzZswAAP+ZMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAACYALAAAAABKABUAAAj/AE0IHGjCk8GDCBMqXMiwocOEBCMONLgoTKSLGC8CAZKxo8ePIEN+tJLGoMSJcyypXMmypcuXMGPKfGnH00lPfi7p3Mmzp8+fQIMKDYrIJkFPYjIpXcq0qdOnUKNKncrHaMFBlLJq3cqVUoSvEaZ0HUuWa52yaClFMeppktu3cONOgsOpbt09cvPqfXsEz96/k6DY9MRjy6PDiBMr9sBJw6MELTj9OBxjgwcOhznESKBhQ4LDnDdoSJBAEacWmH9Y/qy49WEbPAy+MTSgtu3buHtwqlE7EKcuA3SPWLCA9xdOEkYgH4CCuATkaOzOmMFp+AIUuLMP0ENIjsExIWwE/xhPvnx5HZzI3+Ak4gOnPwFWcMoTAP2HABDSyxAhI8CJ9CJwcoN8JwTgnhLmJRjACyGEYJAjDDDwQh8CVGjhhRVyooCFQnDixROcaJHhhpzsMKIAVbCgQBklCqAAJwJ0qEAKLHCSAoYYMuFGhAwYxAYCQDJARxwEFGmkkRhwMkGRJCQCAQlEcFJkFpzAkOSSV5IAQRAuuKAkAVsSYEGVFpSJwZFHAnIFkGwadIgBcMZpQAF01kmnA5w8cIEUhXDiQAEPcJIBCG1wcgGeGRSA6AV5glCCoFRwUkIBjD6gKBgg2EmnE3LKaZAgAIQq6qikUmAXJzkYEeodONSVgw8AmLCqQqyczNoqJ2twskQRdVEAwBl2wUrqsKJyMRgkyCar7LIVHODsActC0mwHyDZbLbTIHtBAB9pC0kC33h5AbbTkIsvWEJukq+667Lbr7rvwxitvuo1Y5UkTmuSr77789uvvvwAHLLAmVgnkCRKYJKzwwgw37PDDEEccccETqVHJxRhnrPHGHHfs8ccck0HxUZ6YIcnJKKNMAw0pt+zyyzDHDDMjJp1E8kM456wzQycFBAA7" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" />
-            <img alt="" border="0" src="data:image/png;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAUUAAAALAAAAAABAAEAAAICRAEAOw==" width="1" height="1" />
-            </form>
 			</p>
-			<?php 
-			echo '<p><strong><a href="'.WPSS_DONATE_URL.'" title="' . __( 'WP-SpamShield is provided for free.', 'wp-spamshield' ) . ' ' . __( 'If you like the plugin, consider a donation to help further its development.', 'wp-spamshield' ) . '" target="_blank" rel="external" >' . rs_wpss_donate_txt() . '</a></strong></p>';
-			?>
 			</div>
 			<div style='width:797px;border-style:solid;border-width:1px;border-color:#333333;background-color:#FEFEFE;padding:0px 15px 0px 15px;margin-top:<?php echo $wpss_vert_margins; ?>px;margin-right:<?php echo $wpss_horz_margins; ?>px;float:left;clear:left;'>
 			<p><a name="wpss_general_options"><h3><?php _e('General Settings' ); ?></h3></a></p>
@@ -518,9 +507,7 @@ if( TRUE !== WPSS_DEBUG && TRUE !== WP_DEBUG ) { @ini_set( 'display_errors', 0 )
   			<p><a name="wpss_let_others_know"><h3><?php _e( 'Let Others Know About WP-SpamShield', 'wp-spamshield' ); ?></h3></a></p>
 			<p><?php _e( '<strong>How does it feel to blog without being bombarded by automated comment spam?</strong> If you\'re happy with WP-SpamShield, there\'s a few things you can do to let others know:', 'wp-spamshield' ); ?></p>
 			<ul style="list-style-type:disc;padding-left:30px;">
-				<li><a href="https://www.redsandmarketing.com/blog/wp-spamshield-wordpress-plugin-released/#comments" target="_blank" rel="external" ><?php _e('Leave a Comment'); ?></a></li>
 				<li><a href="<?php echo WPSS_WP_RATING_URL; ?>" target="_blank" rel="external" ><?php _e( 'Give WP-SpamShield a good rating on WordPress.org.', 'wp-spamshield' ); ?></a></li>
-				<li><a href="<?php echo rs_wpss_append_url( WPSS_HOME_URL.'end-blog-spam/' ); ?>" target="_blank" rel="external" ><?php _e( 'Place a graphic link on your site.', 'wp-spamshield' ); ?></a> <?php _e( 'Let others know how they can help end blog spam.', 'wp-spamshield' ); ?> ( &lt;/BLOGSPAM&gt; )</li>
 			</ul>
 			<p><a href="<?php echo rs_wpss_append_url( WPSS_HOME_URL ); ?>" style="border-style:none;text-decoration:none;" target="_blank" rel="external" ><img src="<?php echo WPSS_PLUGIN_IMG_URL; ?>/end-blog-spam-button-01-black.png" alt="End Blog Spam! WP-SpamShield Comment Spam Protection for WordPress" width="140" height="66" style="border-style:none;text-decoration:none;margin-top:15px;margin-left:15px;" /></a></p>
 			<p><div style="float:right;font-size:12px;">[ <a href="#wpss_top"><?php _e( 'BACK TO TOP', 'wp-spamshield' ); ?></a> ]</div></p>
@@ -529,30 +516,9 @@ if( TRUE !== WPSS_DEBUG && TRUE !== WP_DEBUG ) { @ini_set( 'display_errors', 0 )
 			<div style='width:797px;border-style:solid;border-width:1px;border-color:#003366;background-color:#DDEEFF;padding:0px 15px 0px 15px;margin-top:<?php echo $wpss_vert_margins; ?>px;margin-right:<?php echo $wpss_horz_margins; ?>px;float:left;clear:left;'>
 			<p><a name="wpss_download_plugin_documentation"><h3><?php echo rs_wpss_doc_txt(); ?></h3></a></p>
 			<p><?php echo rs_wpss_plug_hmpage_txt() . ' / ' . rs_wpss_doc_txt(); ?>: <a href="<?php echo rs_wpss_append_url( WPSS_HOME_URL ); ?>" target="_blank" rel="external" >WP-SpamShield</a><br />
-			<?php _e('Leave a Comment'); ?>: <a href="https://www.redsandmarketing.com/blog/wp-spamshield-wordpress-plugin-released/" target="_blank" rel="external" ><?php _e( 'WP-SpamShield Release Announcement Blog Post', 'wp-spamshield' ); ?></a><br />
 			<?php echo rs_wpss_plug_wppage_txt(); ?>: <a href="<?php echo WPSS_WP_URL; ?>" target="_blank" rel="external" >WP-SpamShield</a><br />
 			<?php _e( 'Tech Support / Questions', 'wp-spamshield' ); ?>: <a href="<?php echo rs_wpss_append_url( WPSS_SUPPORT_URL ); ?>" target="_blank" rel="external" ><?php _e( 'WP-SpamShield Support Page', 'wp-spamshield' ); ?></a><br />
-			<?php _e( 'End Blog Spam', 'wp-spamshield' ); ?>: <a href="<?php echo rs_wpss_append_url( WPSS_HOME_URL.'end-blog-spam/' ); ?>" target="_blank" rel="external" ><?php _e( 'Let Others Know About WP-SpamShield', 'wp-spamshield' ); ?>!</a><br />
-			Twitter: <a href="https://twitter.com/WPSpamShield" target="_blank" rel="external" >@WPSpamShield</a><br />
-			<?php 
-			if( rs_wpss_is_lang_en_us() ) {
-				echo 'Need WordPress Consulting? <a href="https://www.redsandmarketing.com/web-design/wordpress-consulting/" target="_blank" rel="external" >We can help.</a><br />';
-			}
-			?>
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="margin-top:10px;">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="DFMTNHJEPFFUL">
-            <input type="image" src="data:image/png;base64,R0lGODlhSgAVAPcmAP+sLf7iq/7gpf7ksf7en/+6Tf+vM7+LNv+xOu7bskBedhA+a/+0QN+aLo9/WHBuWxA+aoCQl0BfeXB+f2BhUc+TMn+Jg7+YU76zkZ+HVp6jmX+Nj97Qre+iKo6Xk56gke+yT/63R3+LiTBUdO7Tm1BdXs4HAkBfd+7ZrH+Khs+VON7MomB0fkBgeq6ojf7HbGBze765o87Bnp6hlf/s0M7Do/7Rhb62mjBKWxA7YjBUczBUcv64SmB2gp9+Qs7EqP/89jBTcY6Uif+lNEBedN+dNIBwSa6wov/NgtEQBY6Vjb+OO/7amP++Xf+3RlBpev7UjP/Ti6+QVb++r8+hUs6/mf/05P/CYNEOBc6+lN7Knf7epP+oLH+MjJ6fjVBrfmBmXf/05v/ryf61Rv/ZoCBJbv/it3BoTY6WkP/py//YnyBCX/+vOkBVYP+/Wf63S767qP7WjP65Tf/w2f/FZu/gwv/u0++kMVBsgmB1gP7hqmB4h//uzv7dnv/w2HCAhP7Qf66smf+mLf/boP6/WTBMYf7Jcv+uM//y2yBIba6unv/sz//itv+pNP+yP/7mt/+pJv/15//rzv7pvv/syP/dqv/46v/03//OhP/w0/+/Xv+xOAAzZswAAP+ZMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAACYALAAAAABKABUAAAj/AE0IHGjCk8GDCBMqXMiwocOEBCMONLgoTKSLGC8CAZKxo8ePIEN+tJLGoMSJcyypXMmypcuXMGPKfGnH00lPfi7p3Mmzp8+fQIMKDYrIJkFPYjIpXcq0qdOnUKNKncrHaMFBlLJq3cqVUoSvEaZ0HUuWa52yaClFMeppktu3cONOgsOpbt09cvPqfXsEz96/k6DY9MRjy6PDiBMr9sBJw6MELTj9OBxjgwcOhznESKBhQ4LDnDdoSJBAEacWmH9Y/qy49WEbPAy+MTSgtu3buHtwqlE7EKcuA3SPWLCA9xdOEkYgH4CCuATkaOzOmMFp+AIUuLMP0ENIjsExIWwE/xhPvnx5HZzI3+Ak4gOnPwFWcMoTAP2HABDSyxAhI8CJ9CJwcoN8JwTgnhLmJRjACyGEYJAjDDDwQh8CVGjhhRVyooCFQnDixROcaJHhhpzsMKIAVbCgQBklCqAAJwJ0qEAKLHCSAoYYMuFGhAwYxAYCQDJARxwEFGmkkRhwMkGRJCQCAQlEcFJkFpzAkOSSV5IAQRAuuKAkAVsSYEGVFpSJwZFHAnIFkGwadIgBcMZpQAF01kmnA5w8cIEUhXDiQAEPcJIBCG1wcgGeGRSA6AV5glCCoFRwUkIBjD6gKBgg2EmnE3LKaZAgAIQq6qikUmAXJzkYEeodONSVgw8AmLCqQqyczNoqJ2twskQRdVEAwBl2wUrqsKJyMRgkyCar7LIVHODsActC0mwHyDZbLbTIHtBAB9pC0kC33h5AbbTkIsvWEJukq+667Lbr7rvwxitvuo1Y5UkTmuSr77789uvvvwAHLLAmVgnkCRKYJKzwwgw37PDDEEccccETqVHJxRhnrPHGHHfs8ccck0HxUZ6YIcnJKKNMAw0pt+zyyzDHDDMjJp1E8kM456wzQycFBAA7" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" />
-            <img alt="" border="0" src="data:image/png;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAUUAAAALAAAAAABAAEAAAICRAEAOw==" width="1" height="1" />
-            </form>
 			</p>
-			<?php 
-			echo '<p><strong><a href="'.WPSS_DONATE_URL.'" target="_blank" rel="external" >' . rs_wpss_donate_txt() . '</a></strong><br />' . __( 'WP-SpamShield is provided for free.', 'wp-spamshield' ) . ' ' . __( 'If you like the plugin, consider a donation to help further its development.', 'wp-spamshield' ) . '<br />
-			<strong>Donate with <a href="https://www.redsandmarketing.com/go/donate/wp-spamshield/" rel="nofollow external" target="_blank">PayPal</a></strong><br />
-			<strong>Bitcoin:</strong>&nbsp; 1PYyD8Fu9DBV9gj4chYkfDDa77fSHMFTfm<br />
-			<strong>Litecoin:</strong>&nbsp; LMAw3ugXsVMSobbJjeTP4WYFjvXT3Ku9hr<br />
-			<strong>Ethereum:</strong>&nbsp; 0xB76085AFb961C5c4562c7Abe92C34DEAd44f258d</p>';
-			?>
 
 			<p><div style="float:right;font-size:12px;">[ <a href="#wpss_top"><?php _e( 'BACK TO TOP', 'wp-spamshield' ); ?></a> ]</div></p>
 			<p>&nbsp;</p>
